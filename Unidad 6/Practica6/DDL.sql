@@ -1,0 +1,54 @@
+CREATE TABLE marcas(
+cif VARCHAR(8),
+nombre VARCHAR(20),
+ciudad VARCHAR(20),
+PRIMARY KEY (nombre)
+);
+
+CREATE TABLE coches(
+cod VARCHAR(15),
+nombre VARCHAR(20),
+marca VARCHAR(8) NOT NULL,
+PRIMARY KEY (cod),
+CONSTRAINT FK_coches FOREIGN KEY (marca) REFERENCES marcas(nombre) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+CREATE TABLE concesionarios(
+cif VARCHAR(8),
+nombre VARCHAR(20),
+ciudad VARCHAR(20),
+PRIMARY KEY (cif)
+);
+
+CREATE TABLE clientes(
+id VARCHAR(10),
+nombre VARCHAR(30),
+apellido VARCHAR(60),
+ciudad VARCHAR(20),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE distribucion(
+cif VARCHAR(8),
+coche VARCHAR(15),
+cantidad NUMERIC(4) NOT NULL DEFAULT 1,
+PRIMARY KEY (cif, coche),
+CONSTRAINT FK_distribucion1 FOREIGN KEY (cif) REFERENCES concesionarios(cif) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT FK_distribucion2 FOREIGN KEY (coche) REFERENCES coches(cod) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+
+CREATE TABLE ventas(
+cif VARCHAR(8),
+dni VARCHAR(10),
+coche VARCHAR(15),
+color VARCHAR(20) DEFAULT 'Blanco',
+fecha DATE CHECK (TO_CHAR(fecha, 'YYYY') > '2015'),
+PRIMARY KEY (cif,dni, coche),
+CONSTRAINT FK_ventas1 FOREIGN KEY (cif) REFERENCES concesionarios(cif) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT FK_ventas2 FOREIGN KEY (coche) REFERENCES coches(cod) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT FK_ventas3 FOREIGN KEY (dni) REFERENCES clientes(id) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+
+
+

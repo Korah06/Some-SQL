@@ -1,0 +1,97 @@
+CREATE TABLE EQUIPO(
+pais VARCHAR(30)NOT NULL,
+seleccionador VARCHAR(30),
+CONSTRAINT PK_EQUIPO PRIMARY KEY (pais)
+);
+
+CREATE TABLE COLEGIADO(
+nombre VARCHAR(30) NOT NULL,
+nacionalidad VARCHAR(30),
+direccion VARCHAR(30),
+CONSTRAINT PK_COLEGIADO PRIMARY KEY (nombre)
+);
+
+CREATE TABLE JUGADOR(
+nombre VARCHAR(30)NOT NULL,
+direccion VARCHAR(30),
+fecha_nac DATE,
+puesto_habitual VARCHAR(30),
+seleccion VARCHAR(30) NOT NULL,
+CONSTRAINT PK_JUGADOR PRIMARY KEY (nombre),
+CONSTRAINT FK_JUGADOR FOREIGN KEY (seleccion) REFERENCES EQUIPO(pais)
+);
+
+CREATE TABLE PARTIDO(
+seleccion_I VARCHAR(30) NOT NULL,
+seleccion_V VARCHAR(30) NOT NULL,
+fecha DATE NOT NULL,
+hora TIME,
+resultado VARCHAR(5),
+sede VARCHAR(30),
+CONSTRAINT PK_PARTIDO PRIMARY KEY (seleccion_I, seleccion_V, fecha),
+CONSTRAINT FK_PARTIDO1 FOREIGN KEY (seleccion_I) REFERENCES EQUIPO(pais),
+CONSTRAINT FK_PARTIDO2 FOREIGN KEY (seleccion_V) REFERENCES EQUIPO(pais)
+);
+
+CREATE TABLE JUGAR(
+nombre_jugador VARCHAR(30) NOT NULL,
+seleccion_I VARCHAR(30)NOT NULL,
+seleccion_V VARCHAR(30)NOT NULL,
+fecha DATE NOT NULL,
+minutos NUMERIC(3,0),
+puesto VARCHAR(30),
+CONSTRAINT PK_JUGAR PRIMARY KEY (nombre_jugador, seleccion_I, seleccion_V, fecha),
+CONSTRAINT FK_JUGAR1 FOREIGN KEY (nombre_jugador) REFERENCES JUGADOR(nombre),
+CONSTRAINT FK_JUGAR2 FOREIGN KEY (seleccion_V, seleccion_I, fecha) REFERENCES PARTIDO(seleccion_V, seleccion_I, fecha)
+);
+
+CREATE TABLE GOL(
+nombre_jugador VARCHAR(30) NOT NULL,
+seleccion_I VARCHAR(30)NOT NULL,
+seleccion_V VARCHAR(30)NOT NULL,
+fecha DATE NOT NULL,
+minuto_gol NUMERIC(3,0) NOT NULL,
+CONSTRAINT PK_GOL PRIMARY KEY (nombre_jugador, seleccion_I, seleccion_V, fecha, minuto_gol),
+CONSTRAINT FK_GOL FOREIGN KEY (nombre_jugador, seleccion_I, seleccion_V, fecha) REFERENCES JUGAR (nombre_jugador, seleccion_I, seleccion_V, fecha)
+);
+
+CREATE TABLE ARBITRAR(
+seleccion_I VARCHAR(30) NOT NULL,
+seleccion_V VARCHAR(30) NOT NULL,
+fecha DATE NOT NULL,
+nombre_arbitro VARCHAR(30),
+tipo VARCHAR(30),
+CONSTRAINT PK_ARBITRAR PRIMARY KEY (seleccion_I, seleccion_V, fecha, nombre_arbitro),
+CONSTRAINT FK_ARBITRAR1 FOREIGN KEY (seleccion_I, seleccion_V, fecha) REFERENCES PARTIDO (seleccion_I, seleccion_V, fecha),
+CONSTRAINT FK_ARBITRAR2 FOREIGN KEY (nombre_arbitro) REFERENCES COLEGIADO (nombre)
+);
+
+CREATE TABLE LABORATORIO(
+CIF VARCHAR(9) NOT NULL,
+nombre VARCHAR(30),
+direccion VARCHAR(30),
+telefono VARCHAR(9),
+CONSTRAINT PK_LABORATORIO PRIMARY KEY (CIF)
+);
+
+CREATE TABLE FEDERATIVO(
+tarjeta_id VARCHAR(10),
+nombre VARCHAR(30),
+telefono VARCHAR(9),
+CONSTRAINT PK_FEDERATIVO PRIMARY KEY (tarjeta_id)
+);
+
+CREATE TABLE ANALISIS(
+nombre_jugador VARCHAR(30) NOT NULL,
+seleccion_I VARCHAR(30)NOT NULL,
+seleccion_V VARCHAR(30)NOT NULL,
+fecha DATE NOT NULL,
+CIF VARCHAR(9) NOT NULL,
+tarjeta_id VARCHAR(10),
+resultado VARCHAR(5),
+CONSTRAINT PK_ANALISIS PRIMARY KEY (nombre_jugador, seleccion_I, seleccion_V, fecha, CIF),
+CONSTRAINT UK_ANALISIS UNIQUE (nombre_jugador, seleccion_I, seleccion_V, fecha, tarjeta_id),
+CONSTRAINT FK_ANALISIS FOREIGN KEY (nombre_jugador, seleccion_I, seleccion_V, fecha)REFERENCES JUGAR (nombre_jugador, seleccion_I, seleccion_V, fecha),
+CONSTRAINT FK_LABORATORIO FOREIGN KEY (CIF) REFERENCES LABORATORIO (CIF),
+CONSTRAINT FK_FEDERATIVO FOREIGN KEY (tarjeta_id) REFERENCES FEDERATIVO (tarjeta_id)
+);

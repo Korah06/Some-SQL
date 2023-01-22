@@ -1,0 +1,43 @@
+a)SELECT * FROM PROFESORES;
+
+b)SELECT categoria FROM PROFESORES;
+
+c)SELECT DISTINCT categoria FROM PROFESORES;
+
+d)SELECT nombre FROM PROFESORES WHERE categoria = 'TEU';
+
+e)SELECT nombre, categoria FROM PROFESORES WHERE categoria = 'TEU' OR categoria = 'ASO6';
+
+f)SELECT * FROM ASIGNATURAS WHERE creditosp IS NULL;
+
+g)SELECT creditos, descripción FROM ASIGNATURAS WHERE creditos BETWEEN 5 AND 8;
+
+h)SELECT descripción FROM ASIGNATURAS WHERE codigo IN('FBD','DGBD');
+
+i)SELECT nombre,asignatura FROM PROFESORES p,IMPARTE i WHERE p.dni = i.dni AND i.dni in (select dni from IMPARTE where categoria NOT IN('HI', 'FBD', 'DGBD'));
+
+j)SELECT nombre FROM PROFESORES WHERE nombre = '%RAFA%';
+
+k)SELECT * FROM ASIGNATURAS WHERE descripción LIKE'%bases de datos%';
+
+l)SELECT codigo FROM ASIGNATURAS WHERE codigo LIKE'__';
+
+m)SELECT descripción FROM ASIGNATURAS WHERE descripción LIKE'%informatic_';
+
+n)SELECT descripción , creditos FROM ASIGNATURAS WHERE creditos = (SELECT min(creditos) FROM ASIGNATURAS);
+
+o)SELECT descripción , creditos FROM ASIGNATURAS WHERE creditos > (SELECT creditos FROM ASIGNATURAS WHERE codigo = 'HI');
+
+p)SELECT descripción , creditos FROM ASIGNATURAS WHERE creditos = (SELECT max(creditos) FROM ASIGNATURAS);
+
+q)SELECT descripción FROM ASIGNATURAS WHERE creditos = (SELECT min(creditos) FROM ASIGNATURAS);
+
+r)SELECT DISTINCT p.nombre FROM IMPARTE i, PROFESORES p WHERE p.dni = i.dni 
+
+s)SELECT * FROM PROFESORES p,IMPARTE i, ASIGNATURAS a WHERE p.dni = i.dni AND a.codigo = i.asignatura AND creditos != (SELECT max(creditos) FROM ASIGNATURAS);
+
+t)SELECT p.* FROM PROFESORES p, IMPARTE i, ASIGNATURAS a WHERE p.dni = i.dni AND a.codigo = i.asignatura AND dni NOT IN (SELECT dni FROM IMPARTE);
+
+u)SELECT nombre FROM PROFESORES WHERE ingreso > '1990-01-01';
+
+v)

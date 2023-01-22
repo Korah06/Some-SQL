@@ -1,0 +1,87 @@
+INSERT INTO HOUSE (id,name) VALUES
+(1, 'Gryffindor'),
+(2, 'Hufflepuf'),
+(3, 'Ravenclaw'),
+(4, 'Ravenclaw')
+;
+
+
+INSERT INTO PERSON (id, first_name, last_name, house_id) VALUES
+(1, 'Euan', 'Abercrombie',1),
+(2, 'Katie', 'Bell', 1),
+(3, 'Lavender', 'Brown', 1),
+(4, 'Colin', 'Creevey', 1),
+(5, 'Dennis', 'Creevey',1),
+(6, 'Seamus', 'Finnigan',1),
+(7, 'Hermione','Granger',1),
+(8, 'Neville', 'Longbottom',1),
+(9, 'Harry', 'Potter',1),
+(10, 'Ron', 'Weasley',1),
+(11, 'Hannah', 'Abbott', 2),
+(12, 'Susan', 'Bones', 2),
+(13, 'Eleanor', 'Branstone',2),
+(14, 'Cedric', 'Diggory',2),
+(15, 'Ernie', 'Macmilan',2),
+(16, 'Cho', 'Chang', 3),
+(17, 'Penelope', 'Clearwater', 3),
+(18, 'Luna', 'Lovegood', 3),
+(19, 'Padma', 'Patil', 3),
+(20, 'Malcolm', 'Baddock', 4),
+(21, 'Gregory', 'Goyle', 4),
+(22, 'Draco', 'Malfoy', 4),
+(23, 'Godric', 'Gryffindor', 1),
+(24, 'Helga', 'Hufflepuff', 2),
+(25, 'Rowena', 'Ravenclaw', 3),
+(26, 'Salazar', 'Slytherin', 4),
+(27, 'Albus', 'Dumbledore', 1),
+(28, 'Ruebus', 'Hagrid', 1),
+(29, 'Minerva', 'McGonagall', 1),
+(30, 'Pomona', 'Sprout', 2),
+(31, 'Severus', 'Snape', 4),
+(32, 'Cuthbert', 'Binns', 1),
+(33, 'Aurora', 'Sinistra', 1),
+(34, 'Rolanda', 'Hooch', 1),
+(35, 'Charity', 'Burbage', 1),
+(36, 'Sybill', 'Trelawney', 1),
+(37, 'Septima', 'Vector', 1),
+(38, 'Bathsheda', 'Babbling', 1),
+(39, 'Horace', 'Slughorn', 4),
+(40, 'Alastor', 'Moody', 1),
+(41, 'Filius', 'Flitwick', 3),
+(42, 'Charity', 'Burbage', 1),
+(43, 'Cuthbert', 'Binns', 1),
+(44, 'Remus', 'Lupin', 1)
+;
+
+UPDATE house
+SET head_teacher = 29
+WHERE id = 1;
+
+UPDATE house
+SET head_teacher = 30
+WHERE id = 2;
+
+UPDATE house
+SET head_teacher = 41
+WHERE id = 3;
+
+UPDATE house
+SET head_teacher = 31
+WHERE id = 4;
+
+INSERT INTO Course (id, name, teacher_id) VALUES
+(1, 'Potions',31),
+(2, 'Transfiguration',29),
+(3, 'Charms',41),
+(4, 'Herbology',30),
+(5, 'Defense Against the Dark Arts',44),
+(6, 'Astronomy',33),
+(7, 'Flying',34),
+(8, 'Muggle Studies',42),
+(9, 'History of Magic',43),
+(10, 'Headmaster',27),
+(11, 'Care of Magical Creatures',28),
+(12, 'Divination',36),
+(13, 'Arithmancy',37),
+(14, 'Ancient Runes',38)
+;

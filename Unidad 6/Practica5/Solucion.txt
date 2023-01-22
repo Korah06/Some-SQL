@@ -1,0 +1,70 @@
+a)
+
+SELECT * FROM COURSE WHERE teacher_id IS NULL;
+
+b)
+
+SELECT name, first_name,last_name FROM house,person  WHERE person.id = house.head_teacher ;
+
+c)
+
+SELECT first_name,last_name, points FROM house_points, person 
+WHERE giver = person.id 
+AND receiver = person.id 
+AND points > 0 OR points < 0;
+
+d)
+
+SELECT first_name,last_name, house.name FROM house, person 
+WHERE  house.id = person.house_id 
+AND name ='Gryffindor' ;
+
+e)
+
+SELECT first_name,last_name, house.name 
+FROM house, person, course
+WHERE course.teacher_id = person.id AND
+house.id = person.house_id AND 
+house.name ='Gryffindor';
+
+f)
+
+SELECT name
+FROM course
+WHERE id NOT IN (SELECT course_enrollment FROM enrollment);
+
+g)
+
+SELECT first_name,last_name 
+FROM person
+WHERE id NOT IN (SELECT person_enrollment FROM enrollment);
+
+h)
+
+SELECT first_name,last_name, course.name
+FROM person, course, enrollment WHERE
+enrollment.person_enrollment = person.id AND
+enrollment.course_enrollment = course.id AND
+course.id IN
+(SELECT course_enrollment 
+ FROM enrollment, course 
+ WHERE enrollment.course_enrollment = course.id 
+ AND course.name = 'Potions')
+;
+
+i)
+
+SELECT first_name,last_name, course.name
+FROM person, course, house
+WHERE person.id = course.teacher_id 
+AND person.house_id = house.id AND
+house.name = 'Slytherin';
+
+j)
+
+SELECT first_name,last_name 
+FROM person 
+WHERE (last_name = 'Lestrange' OR last_name = 'Weasley') AND
+first_name LIKE 'R%'
+;
+

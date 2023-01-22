@@ -1,0 +1,24 @@
+INSERT INTO house_points (giver,receiver,points)VALUES
+ ((SELECT id FROM person WHERE first_name='Severus' AND last_name='Snape'),
+ (SELECT id FROM person WHERE first_name='Harry' AND last_name='Potter'),-50),
+((SELECT id FROM person WHERE first_name='Severus' AND last_name='Snape'),
+ (SELECT id FROM person WHERE first_name='Ron' AND last_name='Weasley'),-50),
+ ((SELECT id FROM person WHERE first_name='Severus' AND last_name='Snape'),
+(SELECT id FROM person WHERE first_name='Hermione' AND last_name='Granger'),-
+50),
+ ((SELECT id FROM person WHERE first_name='Minerva' AND
+last_name='McGonagall'),
+ (SELECT id FROM person WHERE first_name='Harry' AND last_name='Potter'),50),
+ ((SELECT id FROM person WHERE first_name='Albus' AND last_name='Dumbledore'),
+ (SELECT id FROM person WHERE first_name='Harry' AND last_name='Potter'),100),
+((SELECT id FROM person WHERE first_name='Pomona' AND last_name='Sprout'),
+ (SELECT id FROM person WHERE first_name='Hermione' AND
+last_name='Granger'),20);
+
+Aquest codi s'encarrega d' añadir informació a la taula house_points, y per a fer-ho introdueix informació de la tabla person en cada una de les sentencies,
+per a fer açó lo que es fa es a l'hora de introduir els valors s'inserta un SELECT de la id de cada persona on es tinga els valors exactes en la columna first_name
+y en la columna last_name, y despres de realitzar aquest select simplement s'escribirá el nombre de punts que tindrá cada un.
+
+Es podria comprobar el funcionament d' aquest codi mostrant la informació de la taula house_points, amb aquesta linea:
+
+SELECT * FROM house_points;

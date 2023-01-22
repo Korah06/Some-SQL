@@ -1,0 +1,32 @@
+CREATE TABLE COMARQUES(
+nom_c varchar(30) NOT NULL,
+provincia varchar(30),
+CONSTRAINT PK_COMARQUES PRIMARY KEY (nom_c)
+);
+
+CREATE TABLE POBLACIONS (
+    nom varchar(30),
+    poblacio NUMERIC(10,0),
+    extensio NUMERIC(10,2),
+    altura NUMERIC(4,2),
+    longitud NUMERIC(5,2),
+    lat NUMERIC(3,2),
+    llengua VARCHAR(30),
+	nom_c varchar(30),
+    Constraint PK_POBLACIONS PRIMARY KEY (nom)
+);
+
+
+
+CREATE TABLE INSTITUTS(
+
+    codi NUMERIC(4),
+    nom VARCHAR(30),
+    adreca VARCHAR(30),
+    codpostal NUMERIC(5),
+    localitat VARCHAR(30),
+    Constraint PK_INSTITUTS PRIMARY KEY (codi));
+
+ALTER TABLE POBLACIONS ADD CONSTRAINT FK_POBLACIONS FOREIGN KEY (nom_c) REFERENCES COMARQUES (nom_c);
+
+ALTER TABLE INSTITUTS ADD CONSTRAINT FK_INSTITUTS FOREIGN KEY (localitat) REFERENCES POBLACIONS (nom);

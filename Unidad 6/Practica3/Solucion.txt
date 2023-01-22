@@ -1,0 +1,75 @@
+1
+
+ALTER TABLE JUGADOR ADD COLUMN telefono VARCHAR(9);
+
+2
+
+UPDATE JUGADOR SET telefono='120' WHERE equipo_jugador = 'ESPAÑA';
+
+UPDATE JUGADOR SET telefono='90' WHERE equipo_jugador = 'ARGENTINA';
+
+UPDATE JUGADOR SET telefono='100' WHERE equipo_jugador = 'BRASIL';
+
+UPDATE JUGADOR SET telefono='110' WHERE equipo_jugador NOT IN ('FRANCIA', 'ALEMANIA', 'ITALIA');
+
+ALTER TABLE JUGADOR ADD COLUMN tipo_jugador VARCHAR(10);
+
+UPDATE JUGADOR SET tipo_jugador = 'ESPAÑOL' WHERE telefono < '111';
+
+UPDATE JUGADOR SET tipo_jugador = 'EXTRANJERO' WHERE telefono > '111' OR telefono IS NULL;	
+
+
+3
+
+SELECT DISTINCT nombre_jug FROM JUGAR WHERE min_jugar > 45;
+
+4
+
+SELECT * FROM JUGADOR WHERE tipo_jugador = 'EXTRANJERO';
+
+5
+
+SELECT * FROM JUGADOR WHERE nombre LIKE '%A' OR nombre LIKE'%E' OR nombre LIKE'%I' OR nombre LIKE '%O' OR nombre LIKE'%U';
+------------------------------------------------------------------------------------------------------------------------------
+SELECT * FROM JUGADOR WHERE upper(nombre) similar to('%a|e|i|o|u')
+
+6
+
+Insert into JUGADOR (NOMBRE, DIRECCION, PUESTO_HAB, FECHA_NAC, EQUIPO_JUGADOR) Values('MARIO ESPASA', NULL, NULL, NULL, 'ESPAÑA');
+
+7
+
+Insert into PARTIDO (EQUIPO_L, EQUIPO_V, FECHA, HORA, SEDE, RESULTADO_L, RESULTADO_V, ASISTENCIA) Values ('ESPAÑA', 'FRANCIA', TO_DATE('05/01/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), NULL,  NULL, 5, 0, NULL);
+
+8
+
+INSERT INTO JUGAR (nombre_jug, equipo_l_part, equipo_v_part, fecha_part, min_jugar, puesto_jugar, dorsal) 
+SELECT 'MARIO ESPASA', equipo_l,equipo_v,fecha,22,'MC',23 
+		FROM PARTIDO
+		WHERE equipo_l = 'ESPAÑA' OR equipo_v = 'ESPAÑA' AND NOT fecha = '2018-01-05';
+
+9
+
+ALTER TABLE PARTIDO ADD COLUMN HORA2 VARCHAR(8);
+
+UPDATE PARTIDO SET HORA2 = HORA;
+
+UPDATE PARTIDO SET HORA = NULL;
+
+UPDATE PARTIDO SET HORA = HORA2;
+
+ALTER TABLE PARTIDO DROP COLUMN HORA2
+
+10
+
+UPDATE JUGADOR set fecha_nac = '15/02/1994' WHERE nombre = 'JULIO DOS SANTOS'; 
+
+UPDATE JUGADOR set fecha_nac = '15/06/1993' WHERE nombre LIKE '%LAUREN%'; 
+
+UPDATE JUGADOR set fecha_nac = ' 06/02/1995' WHERE nombre = 'LUCAS BARRIOS'; 
+
+UPDATE JUGADOR set fecha_nac = '01/09/1995' WHERE nombre = 'LUIS MARIN'; 
+
+SELECT * FROM JUGADOR WHERE to_char(fecha_nac, 'MM') = '02';
+
+SELECT nombre FROM JUGADOR WHERE fecha_nac IS NOT NULL ORDER BY nombre;

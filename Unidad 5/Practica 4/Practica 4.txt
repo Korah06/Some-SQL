@@ -1,0 +1,55 @@
+CREATE TABLE caballos(
+codCaballo varchar(4) NOT NULL,
+nombre varchar(20) NOT NULL,
+peso numeric(3),
+check (peso BETWEEN 240 AND 300),
+fechanacimiento date CHECK (TO_CHAR(fechanacimiento, 'YYYY') > '2000'),
+propietario varchar(25),	
+nacionalidad varchar(20),
+CONSTRAINT PK_caballos PRIMARY KEY (codCaballo)
+);
+
+
+CREATE TABLE carreras(
+codCarrera varchar(4),
+fecha_hora timestamp CHECK (TO_CHAR(fecha_hora, 'HH24:MI:SS') BETWEEN '09:00:00' AND '14:30:00'),
+nombre varchar(20),
+premio NUMERIC(6),
+apuesta_limite NUMERIC(7,2),
+CONSTRAINT PK_carreras PRIMARY KEY (codCarrera)
+);
+
+
+CREATE TABLE participaciones(
+codCaballo varchar(4),
+codCarrera varchar(4),
+Dorsal NUMERIC(2) NOT NULL,
+Jockey varchar(20) NOT NULL,
+posicionFinal NUMERIC(2) CHECK (posicionFinal > 0),
+CONSTRAINT PK_participaciones PRIMARY KEY (codCaballo),
+CONSTRAINT UK_participaciones UNIQUE (codCarrera),
+CONSTRAINT FK_participaciones1 FOREIGN KEY (codCaballo) REFERENCES caballos(codCaballo),
+CONSTRAINT FK_participaciones2 FOREIGN KEY (codCarrera) REFERENCES carreras(codCarrera)
+);
+
+CREATE TABLE clientes(
+dni VARCHAR(10),
+nombre VARCHAR(20),
+nacionalidad VARCHAR(20),
+CONSTRAINT PK_clientes PRIMARY KEY (dni)
+);
+
+
+CREATE TABLE apuestas(
+dniCliente varchar(10),
+codCaballo varchar(4),
+codCarrera varchar(4),
+importe NUMERIC(6) NOT NULL DEFAULT 300,
+tantoporuno NUMERIC(6,2) CHECK (tantoporuno > 1),
+CONSTRAINT PK_apuestas PRIMARY KEY (dniCliente),
+CONSTRAINT UK_apuestas1 UNIQUE (codCaballo),
+CONSTRAINT UK_apuestas2 UNIQUE (codCarrera),
+CONSTRAINT FK_apuestas1 FOREIGN KEY (codCaballo) REFERENCES caballos(codCaballo),
+CONSTRAINT FK_apuestas2 FOREIGN KEY (codCarrera) REFERENCES carreras(codCarrera),
+CONSTRAINT FK_apuestas3 FOREIGN KEY (dniCliente) REFERENCES clientes(dni)	
+);

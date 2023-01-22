@@ -1,0 +1,14 @@
+INSERT INTO PROFESORES(dni,nombre,categoria,ingreso) VALUES (21111222,'Eva Giner','TEU','1992-10-02');
+INSERT INTO PROFESORES(dni,nombre,categoria,ingreso) VALUES (21111333,'Manuel Perez','TEU','1988-06-15');
+INSERT INTO PROFESORES(dni,nombre,categoria,ingreso) VALUES (21111444,'Rafaela Gomis','ASO6','1993-06-15');
+
+INSERT INTO ASIGNATURAS(codigo,descripción,creditos,creditosp) VALUES ('DGBD','Diseño y gestión de bases de datos',6.0,3.0);
+INSERT INTO ASIGNATURAS(codigo,descripción,creditos,creditosp) VALUES ('FBD','Fundamentos de las bases de datos',6.0,1.5);
+INSERT INTO ASIGNATURAS(codigo,descripción,creditos,creditosp) VALUES ('FP','Fundamentos de la programacion',9.0,4.5);
+INSERT INTO ASIGNATURAS(codigo,descripción,creditos) VALUES ('HI','Historia de la informatica',4.5);
+INSERT INTO ASIGNATURAS(codigo,descripción,creditos,creditosp) VALUES ('PC','Programacion concurrente',6.0,1.5);
+
+
+INSERT INTO IMPARTE (dni, asignatura) VALUES (21111222,'DGBD');
+INSERT INTO IMPARTE (dni, asignatura) VALUES (21111222,'FBD');
+INSERT INTO IMPARTE (dni, asignatura) VALUES (21111444,'PC');
